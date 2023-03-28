@@ -18,7 +18,7 @@ import NotAuthorized from '../pages/NotAuthorized';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ListContacts from '../pages/ListContacts';
 
-/** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
+/** Changed list path. Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
   const { ready } = useTracker(() => {
     const rdy = Roles.subscription.ready();
