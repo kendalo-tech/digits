@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
-import { useTracker } from 'meteor/react-meteor-data';
 import { Roles } from 'meteor/alanning:roles';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Footer from '../components/Footer';
@@ -19,35 +18,27 @@ import ListContacts from '../pages/ListContacts';
 import ListContactsAdmin from '../pages/ListContactsAdmin';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
-const App = () => {
-  const { ready } = useTracker(() => {
-    const rdy = Roles.subscription.ready();
-    return {
-      ready: rdy,
-    };
-  });
-  return (
-    <Router>
-      <div className="d-flex flex-column min-vh-100">
-        <NavBar />
-        <Routes>
-          <Route exact path="/" element={<Landing />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/signout" element={<SignOut />} />
-          <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
-          <Route path="/list" element={<ProtectedRoute><ListContacts /></ProtectedRoute>} />
-          <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
-          <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
-          <Route path="/admin" element={<AdminProtectedRoute><ListContactsAdmin /></AdminProtectedRoute>} />
-          <Route path="/notauthorized" element={<NotAuthorized />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <Footer />
-      </div>
-    </Router>
-  );
-};
+const App = () => (
+  <Router>
+    <div className="d-flex flex-column min-vh-100">
+      <NavBar />
+      <Routes>
+        <Route exact path="/" element={<Landing />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signout" element={<SignOut />} />
+        <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
+        <Route path="/list" element={<ProtectedRoute><ListContacts /></ProtectedRoute>} />
+        <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
+        <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
+        <Route path="/admin" element={<AdminProtectedRoute><ListContactsAdmin /></AdminProtectedRoute>} />
+        <Route path="/notauthorized" element={<NotAuthorized />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <Footer />
+    </div>
+  </Router>
+);
 
 /*
  * ProtectedRoute (see React Router v6 sample)
